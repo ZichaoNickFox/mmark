@@ -33,8 +33,6 @@ library
     exposed-modules:
         Text.MMark
         Text.MMark.Extension
-
-    other-modules:
         Text.MMark.Parser
         Text.MMark.Parser.Internal
         Text.MMark.Parser.Internal.Type
