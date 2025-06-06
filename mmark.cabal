@@ -62,7 +62,10 @@ library
         parser-combinators >=0.4 && <2.0,
         text >=0.2 && <2.1,
         text-metrics >=0.3 && <0.4,
-        unordered-containers >=0.2.5 && <0.3
+        unordered-containers >=0.2.5 && <0.3,
+        template-haskell
+    if impl(ghc < 8.8)
+        build-depends: th-lift-instances >= 0
 
     if !impl(ghcjs >=0)
         build-depends: yaml >=0.11.5 && <0.12

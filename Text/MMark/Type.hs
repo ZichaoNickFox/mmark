@@ -1,8 +1,12 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveFoldable #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveTraversable  #-}
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE DeriveLift #-}
+{-# LANGUAGE StandaloneDeriving #-}
 
 -- |
 -- Module      :  Text.MMark.Type
@@ -38,6 +42,7 @@ import Data.Monoid hiding ((<>))
 import Data.Text (Text)
 import Data.Typeable (Typeable)
 import GHC.Generics
+import Language.Haskell.TH.Syntax (Lift)
 import Lucid
 import Text.URI (URI (..))
 
@@ -174,7 +179,7 @@ data Block a
     --
     -- @since 0.0.4.0
     Table (NonEmpty CellAlign) (NonEmpty (NonEmpty a))
-  deriving (Show, Eq, Ord, Data, Typeable, Generic, Functor, Foldable)
+  deriving (Show, Eq, Ord, Data, Typeable, Generic, Functor, Foldable, Traversable, Lift)
 
 instance NFData a => NFData (Block a)
 
@@ -190,7 +195,7 @@ data CellAlign
     CellAlignRight
   | -- | Center-alignment
     CellAlignCenter
-  deriving (Show, Eq, Ord, Data, Typeable, Generic)
+  deriving (Show, Eq, Ord, Data, Typeable, Generic, Lift)
 
 instance NFData CellAlign
 
@@ -216,7 +221,7 @@ data Inline
     Link (NonEmpty Inline) URI (Maybe Text)
   | -- | Image with description, URL, and optionally title
     Image (NonEmpty Inline) URI (Maybe Text)
-  deriving (Show, Eq, Ord, Data, Typeable, Generic)
+  deriving (Show, Eq, Ord, Data, Typeable, Generic, Lift)
 
 instance NFData Inline
 
